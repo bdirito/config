@@ -1,0 +1,10 @@
+[user]
+	email = brian@boulderlabs.com
+	name = bdirito
+[alias]
+	co = checkout
+	br = branch
+	ci = commit
+	st = status
+[push]
+	default = simple
