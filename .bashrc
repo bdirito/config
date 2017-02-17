@@ -118,6 +118,10 @@ fi
 
 # bdirito custom
 
+function ffff() {
+    echo 'abc'
+}
+
 # get current branch in git repo
 function parse_git_branch() {
     BRANCH=`git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'`
@@ -174,3 +178,15 @@ export PATH=${PATH}:./node_modules/.bin/
 # android exports
 export ANDROID_HOME=${HOME}/dev/tools/
 export PATH=${PATH}:${HOME}/Android/Sdk/tools/:${HOME}/Android/platform-tools/
+
+# see how i want to do options? before? after? smart
+# function l() {
+#     echo "checking #{$1}"
+#     if [ -d "$1" ]; then
+#         echo 'is dir'
+# #        ls $1
+#     else
+#         echo 'not dir'
+# #        less $1
+#     fi
+# }
