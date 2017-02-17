@@ -54,7 +54,6 @@ fi
 # some more ls aliases
 alias ll='ls -alF'
 alias la='ls -A'
-alias l='ls -CF'
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
@@ -81,10 +80,6 @@ if ! shopt -oq posix; then
 fi
 
 # bdirito custom
-
-function ffff() {
-    echo 'abc'
-}
 
 # get current branch in git repo
 function parse_git_branch() {
@@ -156,14 +151,11 @@ export PATH=${PATH}:./node_modules/.bin/
 export ANDROID_HOME=${HOME}/dev/tools/
 export PATH=${PATH}:${HOME}/Android/Sdk/tools/:${HOME}/Android/platform-tools/
 
-# see how i want to do options? before? after? smart
-# function l() {
-#     echo "checking #{$1}"
-#     if [ -d "$1" ]; then
-#         echo 'is dir'
-# #        ls $1
-#     else
-#         echo 'not dir'
-# #        less $1
-#     fi
-# }
+# dont know how i want options so for now just dont do em
+function l() {
+    if [ -d "$1" ]; then
+        ls $1
+    else
+        less $1
+    fi
+}
