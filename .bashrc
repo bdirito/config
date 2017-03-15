@@ -172,5 +172,8 @@ export VISUAL=emacs
 # use local node_modules if they are there
 export PATH=${PATH}:./node_modules/.bin/
 # android exports
-export ANDROID_HOME=${HOME}/dev/tools/
+export ANDROID_HOME=${HOME}/Android/Sdk
 export PATH=${PATH}:${HOME}/Android/Sdk/tools/:${HOME}/Android/platform-tools/
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm

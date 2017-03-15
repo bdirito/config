@@ -450,7 +450,10 @@ annoying buffers if they are encountered:
  '(ecb-options-version "2.32")
  '(inhibit-startup-screen t)
  '(js2-basic-offset 2)
- '(load-home-init-file t t))
+ '(load-home-init-file t t)
+ '(package-selected-packages
+   (quote
+    (whitespace-cleanup-mode web-mode nyan-mode js2-mode jinja2-mode coffee-mode))))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -620,4 +623,5 @@ This can be slightly disconcerting, but some people may prefer it."
     map)
   "Customizations for coffee-mode.")
 
-(add-hook 'before-save-hook 'whitespace-cleanup)
+(global-whitespace-cleanup-mode)
+(setq whitespace-cleanup-mode-only-if-initially-clean nil)
