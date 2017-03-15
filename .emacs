@@ -7,7 +7,7 @@
 (modify-frame-parameters nil '((wait-for-wm . nil)))
 
 ;;; default font
-;(set-default-font "-windows-proggyclean-medium-r-normal--13-80-96-96-c-70-iso8859-1")
+(set-default-font "Source Code Pro Light-11")
 
 ;; melpha
 (require 'package)
@@ -64,11 +64,8 @@
 ;(require 'jde)
 
 (setq x-select-enable-clipboard t)
-(setq interprogram-paste-function 'x-cut-buffer-or-selection-value)
+(setq interprogram-paste-function 'x-selection-value)
 
-
-(if (>= emacs-major-version 23)
-    (set-default-font "Monospace-11"))
 
 ;Add cmake listfile names to the mode list.
 (autoload 'cmake-mode "cmake-mode.el" t)
@@ -454,31 +451,9 @@ annoying buffers if they are encountered:
  '(package-selected-packages
    (quote
     (whitespace-cleanup-mode web-mode nyan-mode js2-mode jinja2-mode coffee-mode))))
+ '(show-paren-mode t)
+ '(tool-bar-mode nil))
 
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
-; '(highlight ((t (:background "CornflowerBlue"))))
-; '(list-mode-item-selected ((t (:background "gold"))))
-; '(makefile-space-face ((t (:background "wheat"))))
-; '(modeline ((t (:background "Navy"))))
-; '(paren-match ((t (:background "darkseagreen4"))))
-; '(region ((t (:background "DarkSlateBlue")))))
-; '(show-paren-match-face ((t (:foreground "black" :background "wheat"))))
-; '(show-paren-mismatch-face ((((class color)) (:foreground "white" :background "red"))))
-; '(speedbar-button-face ((((class color) (background dark)) (:foreground "green4"))))
-; '(speedbar-directory-face ((((class color) (background dark)) (:foreground "khaki"))))
-; '(speedbar-file-face ((((class color) (background dark)) (:foreground "cyan"))))
-; '(speedbar-tag-face ((((class color) (background dark)) (:foreground "Springgreen")))))
-; '(vhdl-speedbar-architecture-selected-face ((((class color) (background dark)) (:underline t :foreground "Blue"))))
-; '(vhdl-speedbar-entity-face ((((class color) (background dark)) (:foreground "darkGreen"))))
-; '(vhdl-speedbar-entity-selected-face ((((class color) (background dark)) (:underline t :foreground "darkGreen"))))
-; '(vhdl-speedbar-package-face ((((class color) (background dark)) (:foreground "black"))))
-; '(vhdl-speedbar-package-selected-face ((((class color) (background dark)) (:underline t :foreground "black"))))
-; '(widget-field-face ((((class grayscale color) (background light)) (:background "DarkBlue")))))
 
 
 ;; http://www.dotemacs.de/dotfiles/SteveDodd.emacs.html
@@ -612,8 +587,6 @@ This can be slightly disconcerting, but some people may prefer it."
        auto-mode-alist))
 
 ;; bdirito changes
-
-(set-default-font "Source Code Pro Light 11")
 
 ;; python-mode style indents for coffee-mode 'C-c <' vs 'C-c C-<'
 (defvar coffee-mode-map
