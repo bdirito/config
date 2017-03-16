@@ -452,7 +452,7 @@ annoying buffers if they are encountered:
    (quote
     (whitespace-cleanup-mode web-mode nyan-mode js2-mode jinja2-mode coffee-mode))))
  '(show-paren-mode t)
- '(tool-bar-mode nil))
+ '(tool-bar-mode nil)
 
 
 
