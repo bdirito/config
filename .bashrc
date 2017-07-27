@@ -146,10 +146,11 @@ export PS1="${BLUE}\u${NOCOLOR}@${YELLOW}\h:${GREEN}\w${CYAN}\`parse_git_branch\
 export EDITOR=emacs
 export VISUAL=emacs
 # use local node_modules if they are there
-export PATH=${PATH}:./node_modules/.bin/
+export PATH=./node_modules/.bin/:${PATH}
 # android exports
 export ANDROID_HOME=${HOME}/Android/Sdk
 export PATH=${PATH}:${HOME}/Android/Sdk/tools/:${HOME}/Android/platform-tools/
+export PATH=${PATH}:${HOME}/dev/tools/android-studio/gradle/gradle-3.2/bin/
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
