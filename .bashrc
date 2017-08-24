@@ -150,7 +150,8 @@ export PATH=./node_modules/.bin/:${PATH}
 # android exports
 export ANDROID_HOME=${HOME}/Android/Sdk
 export PATH=${PATH}:${HOME}/Android/Sdk/tools/:${HOME}/Android/platform-tools/
-export PATH=${PATH}:${HOME}/dev/tools/android-studio/gradle/gradle-3.2/bin/
+# aws cli
+export PATH=${PATH}:${HOME}/dev/aws/bin/
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
