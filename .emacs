@@ -451,7 +451,7 @@ annoying buffers if they are encountered:
  '(load-home-init-file t t)
  '(package-selected-packages
    (quote
-    (ack tide typescript-mode whitespace-cleanup-mode web-mode nyan-mode js2-mode jinja2-mode coffee-mode))))
+    (yaml-mode ack tide typescript-mode whitespace-cleanup-mode web-mode nyan-mode js2-mode jinja2-mode coffee-mode))))
  '(show-paren-mode t)
  '(tool-bar-mode nil)
 
@@ -596,6 +596,20 @@ This can be slightly disconcerting, but some people may prefer it."
     (define-key map (kbd "C-c >") 'coffee-indent-shift-right)
     map)
   "Customizations for coffee-mode.")
+;; yaml hooks
+(defun indent-rigidly-n (n)
+  "Indent the region, or otherwise the current line, by N spaces."
+  (let* ((use-region (and transient-mark-mode mark-active))
+         (rstart (if use-region (region-beginning) (point-at-bol)))
+         (rend   (if use-region (region-end)       (point-at-eol)))
+         (deactivate-mark "irrelevant")) ; avoid deactivating mark
+    (indent-rigidly rstart rend n)))
+(defvar yaml-mode-map
+  (let ((map (make-sparse-keymap)))
+    (define-key map (kbd "C-c <") (lambda() (interactive) (indent-rigidly-n -2)))
+    (define-key map (kbd "C-c >") (lambda() (interactive) (indent-rigidly-n 2)))
+    map)
+  "Customizations for yaml-mode.")
 
 (global-whitespace-cleanup-mode)
 (setq whitespace-cleanup-mode-only-if-initially-clean nil)
