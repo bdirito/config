@@ -451,7 +451,7 @@ annoying buffers if they are encountered:
  '(load-home-init-file t t)
  '(package-selected-packages
    (quote
-    (yaml-mode ack tide typescript-mode whitespace-cleanup-mode web-mode nyan-mode js2-mode jinja2-mode coffee-mode))))
+    (ace-window magit elpy terraform-mode yaml-mode ack tide typescript-mode whitespace-cleanup-mode web-mode nyan-mode js2-mode jinja2-mode coffee-mode))))
  '(show-paren-mode t)
  '(tool-bar-mode nil)
 
@@ -589,6 +589,10 @@ This can be slightly disconcerting, but some people may prefer it."
 
 ;; bdirito changes
 
+;; magit
+(global-set-key (kbd "C-x o") 'ace-window)
+(global-set-key (kbd "C-x g") 'magit-status)
+
 ;; python-mode style indents for coffee-mode 'C-c <' vs 'C-c C-<'
 (defvar coffee-mode-map
   (let ((map (make-sparse-keymap)))
@@ -639,3 +643,4 @@ This can be slightly disconcerting, but some people may prefer it."
 (add-hook 'before-save-hook 'tide-format-before-save)
 
 (add-hook 'typescript-mode-hook #'setup-tide-mode)
+(put 'downcase-region 'disabled nil)

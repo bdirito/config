@@ -1,10 +1,14 @@
 [user]
-	email = brian@boulderlabs.com
-	name = bdirito
+    email = brian@boulderlabs.com
+    name = bdirito
 [alias]
-	co = checkout
-	br = branch
-	ci = commit
-	st = status
+    co = checkout
+    br = branch
+    ci = commit
+    st = status
 [push]
-	default = simple
+    default = simple
+[color]
+    ui = true
+[init]
+	templatedir = ~/.git_templates
