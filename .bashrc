@@ -133,6 +133,8 @@ if [ "$(expr substr $(uname -s) 1 10)" == "MINGW64_NT" ]; then
     alias emacs=runemacs
 fi
 
+PROMPT_WARN="false"
+
 RED=$'\e[1;31m'
 GREEN=$'\e[1;32m'
 YELLOW=$'\e[1;33m'
@@ -141,18 +143,77 @@ MAGNENTA=$'\e[1;35m'
 CYAN=$'\e[1;36m'
 NOCOLOR=$'\e[0m'
 
-export PS1="${BLUE}\u${NOCOLOR}@${YELLOW}\h:${GREEN}\w${CYAN}\`parse_git_branch\`${NOCOLOR} \\n\\$ "
+
+KUBE_PS1_SYMBOL_ENABLE=false
+KUBE_PS1_CLUSTER_FUNCTION=get_kube_cluster
+KUBE_PS1_NAMESPACE_FUNCTION=get_kube_ns
+
+. /home/bdirito/dev/tools/kube-ps1/kube-ps1.sh
+
+
+# this is a bit messed up. This MUST return non-null. else you get N/A : N:A because the script shortcuts
+get_kube_cluster() {
+    echo "ns"
+}
+# get_kube_cluster() {
+#     echo "${NOCOLOR}`echo "${1}" | cut -d. -f1 | cut -d@ -f2`${NOCOLOR}"
+# }
+
+get_kube_ns() {
+    if [[ "$1" == "prod" ]]; then
+        PROMPT_WARN="true"
+        echo "${RED}>>>${1}<<<${NOCOLOR}"
+    else
+        echo "${CYAN}${1}${NOCOLOR}"
+    fi
+}
+
+maybe_do_k() {
+    if [[ "${KUBERNETES_SHELL}" == "true" ]]; then
+        echo `kube_ps1`
+    else
+        echo ''
+    fi
+}
+
+maybe_shell_warn() {
+    if [[ "${PROMPT_WARN}" == "true"  ]]; then
+        echo "${RED}"
+    else
+        echo ""
+    fi
+}
+
+# maybe_do_k is purposly color unescaped - thus if we are in prod the whole prompt will be red
+export PS1="${BLUE}\u${NOCOLOR}@${YELLOW}\h:${GREEN}\w${CYAN}\`parse_git_branch\`${NOCOLOR} \`maybe_do_k\`${NOCOLOR} \\n\`maybe_shell_warn\`\$ "
+
+# kubernetes
+alias k=kubectl
+alias kcx=kubectx
+alias kns=kubens
+alias k_edit_secret="KUBE_EDITOR=kube-secret-editor.py kubectl edit secret"
+eval "$(direnv hook bash)"
+source <(kubectl completion bash)
+
 
 export EDITOR=emacs
 export VISUAL=emacs
-# use local node_modules if they are there
-export PATH=./node_modules/.bin/:${PATH}
+
 # android exports
+#export ANDROID_EMULATOR_USE_SYSTEM_LIBS=1
 export ANDROID_HOME=${HOME}/Android/Sdk
 export PATH=${PATH}:${HOME}/Android/Sdk/tools/:${HOME}/Android/platform-tools/
 
+export SPLUNK_TOKEN=0cad55ee-98e4-4225-8bf3-58d9eb910556
+export SPLUNK_INDEX=bdirito-tmp
+# autojump
+source /usr/share/autojump/autojump.sh
+
 # common tools bin link
-export PATH=${PATH}:${HOME}/dev/tools/binlink/
+export PATH=${PATH}:${HOME}/go/bin/:${HOME}/dev/tools/binlink/
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+export NODE_OPTIONS=--max-old-space-size=14096
+# use local node_modules if they are there
+export PATH=./node_modules/.bin/:${PATH}

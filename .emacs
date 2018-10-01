@@ -451,7 +451,7 @@ annoying buffers if they are encountered:
  '(load-home-init-file t t)
  '(package-selected-packages
    (quote
-    (ace-window magit elpy terraform-mode yaml-mode ack tide typescript-mode whitespace-cleanup-mode web-mode nyan-mode js2-mode jinja2-mode coffee-mode))))
+    (dockerfile-mode go-mode ace-window magit elpy terraform-mode yaml-mode ack tide typescript-mode whitespace-cleanup-mode web-mode nyan-mode js2-mode jinja2-mode coffee-mode))))
  '(show-paren-mode t)
  '(tool-bar-mode nil)
 
