@@ -446,12 +446,14 @@ annoying buffers if they are encountered:
     ("f0a99f53cbf7b004ba0c1760aa14fd70f2eabafe4e62a2b3cf5cabae8203113b" "0e121ff9bef6937edad8dfcff7d88ac9219b5b4f1570fd1702e546a80dba0832" "4aee8551b53a43a883cb0b7f3255d6859d766b6c5e14bcb01bed572fcbef4328" "64581032564feda2b5f2cf389018b4b9906d98293d84d84142d90d7986032d33" "255104c2f5c857498231bc7efbd374026e4ad43547d6fdb4c08be95bc9c871bd" "72407995e2f9932fda3347e44e8c3f29879c5ed88da71f06ba4887b0596959a4" "ad9fc392386f4859d28fe4ef3803585b51557838dbc072762117adad37e83585" "49eea2857afb24808915643b1b5bd093eefb35424c758f502e98a03d0d3df4b1" "4eaad15465961fd26ef9eef3bee2f630a71d8a4b5b0a588dc851135302f69b16" "9dae95cdbed1505d45322ef8b5aa90ccb6cb59e0ff26fef0b8f411dfc416c552" "ed5af4af1d148dc4e0e79e4215c85e7ed21488d63303ddde27880ea91112b07e" "2b5aa66b7d5be41b18cc67f3286ae664134b95ccc4a86c9339c886dfd736132d" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" "d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" "a8245b7cc985a0610d71f9852e9f2767ad1b852c2bdea6f4aadc12cce9c4d6d0" default)))
  '(ecb-options-version "2.32")
  '(inhibit-startup-screen t)
- '(js-indent-level 2)
- '(js2-basic-offset 2)
+ '(js-indent-level 4)
+ '(js2-basic-offset 4)
+ '(js2-strict-missing-semi-warning nil)
+ '(js2-strict-trailing-comma-warning nil)
  '(load-home-init-file t t)
  '(package-selected-packages
    (quote
-    (dockerfile-mode go-mode ace-window magit elpy terraform-mode yaml-mode ack tide typescript-mode whitespace-cleanup-mode web-mode nyan-mode js2-mode jinja2-mode coffee-mode))))
+    (company dockerfile-mode go-mode ace-window magit elpy terraform-mode yaml-mode ack tide typescript-mode whitespace-cleanup-mode web-mode nyan-mode js2-mode jinja2-mode coffee-mode))))
  '(show-paren-mode t)
  '(tool-bar-mode nil)
 
