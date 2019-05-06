@@ -7,7 +7,7 @@
 (modify-frame-parameters nil '((wait-for-wm . nil)))
 
 ;;; default font
-(set-default-font "Source Code Pro Light-11")
+(set-frame-font "Source Code Pro Light-11")
 
 ;; melpha
 (require 'package)
@@ -35,14 +35,6 @@
 
 ;(setq load-path (cons "~/.emacs.d/themes" load-path))
 (setq load-path (cons "~/.emacs.d/lisp" load-path))
-;(setq load-path (cons "~/.emacs.d/ocaml-mode" load-path))
-;(load-library "camldebug")
-;(load-library "php-mode")
-;(load-library "python-mode")
-;(load-library "ruby-mode")
-;(load-library "color-theme")
-;(load-library "color-theme-library")
-;(load "~/.emacs.d/haskell-mode/haskell-site-file")
 (setq inhibit-splash-screen t)
 (show-paren-mode 1)
 ;(require 'erlang-start)
@@ -58,12 +50,7 @@
 
 
 
-
-; jdee
-;(load-file (expand-file-name "/usr/share/emacs/site-lisp/cedet-common/cedet.el"))
-;(require 'jde)
-
-(setq x-select-enable-clipboard t)
+(setq select-enable-clipboard t)
 (setq interprogram-paste-function 'x-selection-value)
 
 
@@ -121,10 +108,7 @@
 (setq require-final-newline t)             ;;; Put \n at end of last line
 (setq make-backup-files nil)               ;;; Don't make backup files
 (setq line-number-mode t)                  ;;; Put line number in display
-(setq default-major-mode 'text-mode)       ;;; New buffers are text mode
-;(setq fill-column 80)                      ;;; Text lines limit to 80 chars
-;(add-hook 'text-mode-hook 'turn-on-auto-fill); Line limit on in text mode
-                                           ;;; -------------------------------
+(setq major-mode 'text-mode)               ;;; New buffers are text mode
 
 ;;; Michael's
 ;;; Function
@@ -171,8 +155,6 @@
 )
 
 ;;; Some key bindings                      *** ------------------------------
-(global-set-key [8]  'delete-backward-char);;; Ctrl-h = Backspace
-;(global-set-key [11] 'delete-whole-line)   ;;; Ctrl-k = Kill whole line
 ;;; Home, end, del keys                    *** --------------------------
 (global-set-key [delete] 'delete-char) ;;; Delete = Delete char before cursor
 (global-set-key [kp-delete] 'delete-char);; Delete = Delete char before cursor
@@ -201,13 +183,7 @@
 (global-set-key "\e\e[H" 'front)           ;;; Esc Home = front of file
 (global-set-key "\e\e[K" 'end-of-buffer)   ;;; Esc End = end of file
 (global-set-key "\M-g" 'goto-line)         ;;; alt-g = goto line
-(global-set-key (kbd "\e\el") 'compile)    ;;; Esc Esc l = compile
-(global-set-key (kbd "\M-c") 'compile)     ;;; alt-c = compile
 (global-set-key (kbd "\e\et") 'to-tab-or-not-to-tab)
-(global-set-key "\M-n" 'next-error)        ;;; alt-n = goto next error
-(global-set-key "\M-p" 'previous-error)    ;;; alt-p = goto previous error
-(global-set-key "\C-c#" 'comment-region)     ;;; ctrl-x # comment region
-(global-set-key "\C-c3" 'uncomment-region)     ;;; ctrl-x # comment region
 
 ;;; ------------------------------
 
@@ -274,41 +250,6 @@
 (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
 (add-hook 'after-save-hook
   'executable-make-buffer-file-executable-if-script-p)
-
-;(add-hook 'python-mode-hook 'jedi:setup)
-;(setq jedi:complete-on-dot t)
-
-;;; scheme-mode
-;;; This mode is not entirely to my liking because I prefer to place
-;;; the closing parenthesis on a line of its own, lined up under its
-;;; corresponding closing parenthesis. The modification of this mode
-;;; to support that programming style is on my to-do list.
-;;(add-hook 'scheme-mode-hook
-;;  '(lambda()
-;;        (local-set-key [13] 'scheme-return)   ;;; RET with automatic indent
-;        (local-set-key "\ep" 'indent-all)      ;;; esc-p pretty-prints file
-;        (setq lisp-indent-offset 4)           ;;; 4 spaces for indentation
-;    )
-;)
-
-
-;;; Michael's connections between editing modes and file names:
-;;; Files ending in .h or .template should be edited in c++-mode.
-;;; Emacs already knows what to do with .c and .scm files.
-;;; I haven't yet found a good mode for bison/flex files, so I just use
-;;; indented-text-mode (where a TAB indents a line the same as last line).
-(setq auto-mode-alist (cons '("\\.h$" . c++-mode) auto-mode-alist))
-(setq auto-mode-alist (cons '("\\.template$" . c++-mode) auto-mode-alist))
-(setq auto-mode-alist (cons '("\\.cxx$" . c++-mode) auto-mode-alist))
-(setq auto-mode-alist (cons '("\\.cpp$" . c++-mode) auto-mode-alist))
-(setq auto-mode-alist (cons '("\\.cc$" . c++-mode) auto-mode-alist))
-(setq auto-mode-alist (cons '("\\.java$" . java-mode) auto-mode-alist))
-;(setq auto-mode-alist (cons '("\\.pl$" . prolog-mode) auto-mode-alist))
-(setq auto-mode-alist (cons '("\\.y$" . indented-text-mode) auto-mode-alist))
-(setq auto-mode-alist (cons '("\\.lex$" . indented-text-mode) auto-mode-alist))
-(setq auto-mode-alist (cons '("\\.sql$" . indented-text-mode) auto-mode-alist))
-(setq auto-mode-alist (cons '("\\.py$" . python-mode) auto-mode-alist))
-(setq auto-mode-alist (cons '("\\.rb$" . ruby-mode) auto-mode-alist))
 
 ;;; From John Gillett's emacs file
 ;;; ---------------------------------------------------------------
@@ -453,7 +394,7 @@ annoying buffers if they are encountered:
  '(load-home-init-file t t)
  '(package-selected-packages
    (quote
-    (company dockerfile-mode go-mode ace-window magit elpy terraform-mode yaml-mode ack tide typescript-mode whitespace-cleanup-mode web-mode nyan-mode js2-mode jinja2-mode coffee-mode))))
+    (use-package hydra highlight-indent-guides json-mode markdown-mode company dockerfile-mode go-mode ace-window magit elpy terraform-mode yaml-mode ack tide typescript-mode whitespace-cleanup-mode web-mode nyan-mode js2-mode jinja2-mode coffee-mode))))
  '(show-paren-mode t)
  '(tool-bar-mode nil)
 
@@ -529,7 +470,7 @@ This can be slightly disconcerting, but some people may prefer it."
       (let ((x (symbol-name (event-basic-type event))))
         (if (not (string-match "^mouse-\\([0-9]+\\)" x))
             (error "Not a button event: %S" event))
-        (string-to-int (substring x (match-beginning 1) (match-end 1)))))
+        (string-to-number (substring x (match-beginning 1) (match-end 1)))))
   (fset 'mwheel-event-button 'event-button))
 
 (if (not (fboundp 'event-window))
@@ -591,9 +532,25 @@ This can be slightly disconcerting, but some people may prefer it."
 
 ;; bdirito changes
 
+(nyan-mode 1)
+
+;; python
+(global-flycheck-mode 1)
+(with-eval-after-load 'flycheck
+  (add-hook 'flycheck-mode-hook #'flycheck-pycheckers-setup))
+
+;; json
+(add-hook 'json-mode-hook
+          (lambda ()
+            (make-local-variable 'js-indent-level)
+            (setq js-indent-level 2)))
+(add-hook 'json-mode-hook 'flycheck-mode)
+
 ;; magit
 (global-set-key (kbd "C-x o") 'ace-window)
 (global-set-key (kbd "C-x g") 'magit-status)
+
+
 
 ;; python-mode style indents for coffee-mode 'C-c <' vs 'C-c C-<'
 (defvar coffee-mode-map
@@ -616,6 +573,12 @@ This can be slightly disconcerting, but some people may prefer it."
     (define-key map (kbd "C-c >") (lambda() (interactive) (indent-rigidly-n 2)))
     map)
   "Customizations for yaml-mode.")
+(add-hook 'yaml-mode-hook 'highlight-indent-guides-mode)
+(setq highlight-indent-guides-method 'fill)
+(setq highlight-indent-guides-responsive "top")
+
+(global-set-key (kbd "C-x t") 'hs-toggle-hiding)
+
 
 (global-whitespace-cleanup-mode)
 (setq whitespace-cleanup-mode-only-if-initially-clean nil)
@@ -646,3 +609,41 @@ This can be slightly disconcerting, but some people may prefer it."
 
 (add-hook 'typescript-mode-hook #'setup-tide-mode)
 (put 'downcase-region 'disabled nil)
+(put 'upcase-region 'disabled nil)
+
+;; smerge hydra
+
+  (defhydra hydra-smerge
+    (:color pink :hint nil :post (smerge-auto-leave))
+    "
+^Move^       ^Keep^               ^Diff^                 ^Other^
+^^-----------^^-------------------^^---------------------^^-------
+_n_ext       _b_ase               _<_: upper/base        _C_ombine
+_p_rev       _u_pper              _=_: upper/lower       _r_esolve
+^^           _l_ower              _>_: base/lower        _k_ill current
+^^           _a_ll                _R_efine
+^^           _RET_: current       _E_diff
+"
+    ("n" smerge-next)
+    ("p" smerge-prev)
+    ("b" smerge-keep-base)
+    ("u" (lambda () (interactive) (smerge-keep-upper) (smerge-next)))
+    ("l" (lambda () (interactive) (smerge-keep-lower) (smerge-next)))
+    ("a" smerge-keep-all)
+    ("RET" smerge-keep-current)
+    ("\C-m" smerge-keep-current)
+    ("<" smerge-diff-base-upper)
+    ("=" smerge-diff-upper-lower)
+    (">" smerge-diff-base-lower)
+    ("R" smerge-refine)
+    ("E" smerge-ediff)
+    ("C" smerge-combine-with-next)
+    ("r" smerge-resolve)
+    ("k" smerge-kill-current)
+    ("ZZ" (lambda ()
+            (interactive)
+            (save-buffer)
+            (bury-buffer))
+     "Save and bury buffer" :color blue)
+    ("q" nil "cancel" :color blue))
+(define-key smerge-mode-map "e" 'hydra-smerge/body)
