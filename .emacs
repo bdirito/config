@@ -612,7 +612,17 @@ This can be slightly disconcerting, but some people may prefer it."
 (put 'upcase-region 'disabled nil)
 
 ;; smerge hydra
-
+(use-package smerge-mode
+  :bind ("C-x m" . hydra-smerge/body)
+  :init (progn
+          (defun bdirito/enable-smerge-maybe ()
+            "auto enable `smerge-mode` when merge conflict is detected."
+            (save-excursion
+              (goto-char (point-min))
+              (when (re-search-forward "^<<<<<<< " nil :noerror)
+                (smerge-mode 1))))
+          (add-hook 'find-file-hook #'bdirito/enable-smerge-maybe :append))
+  :config
   (defhydra hydra-smerge
     (:color pink :hint nil :post (smerge-auto-leave))
     "
@@ -646,4 +656,4 @@ _p_rev       _u_pper              _=_: upper/lower       _r_esolve
             (bury-buffer))
      "Save and bury buffer" :color blue)
     ("q" nil "cancel" :color blue))
-(define-key smerge-mode-map "e" 'hydra-smerge/body)
+  )
