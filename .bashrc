@@ -379,11 +379,12 @@ kube_ps1() {
 
 # this is a bit messed up. This MUST return non-null. else you get N/A : N:A because the script shortcuts
 get_kube_cluster() {
-    if [[ "${1}" == "minikube" ]]; then
-        echo "${CYAN}${1}"
-    else
-        echo "${RED}${1}"
-    fi
+    echo "${CYAN}k"
+    # if [[ "${1}" == "minikube" ]]; then
+    #     echo "${CYAN}${1}"
+    # else
+    #     echo "${RED}${1}"
+    # fi
 }
 
 
@@ -446,3 +447,9 @@ export NODE_OPTIONS=--max-old-space-size=14096
 # use local node_modules if they are there
 export PATH=./node_modules/.bin/:${HOME}/.yarn/bin:${PATH}
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+
+eval $(thefuck --alias fk)
+
+# python local path
+export PATH=${PATH}:${HOME}/.local/bin/

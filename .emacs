@@ -621,6 +621,21 @@ This can be slightly disconcerting, but some people may prefer it."
 (flycheck-add-mode 'typescript-tslint 'web-mode)
 
 ;; smerge hydra
+
+;; based from modi
+(defmacro >=e (version &rest body)
+  "Emacs VERSION check wrapper around BODY.
+BODY can contain both `if' block (for stuff to execute if emacs
+is equal or newer than VERSION) and `else' block (for stuff to
+execute if emacs is older than VERSION).
+Example:
+  (>=e \"25.0\"
+      (defun-compatible-with-25.0)
+    (defun-not-compatible-in-older-version))"
+  (declare (indent 2))          ;`if'-style indentation where this macro is used
+  `(if (version<= ,version emacs-version)
+       ,@body))
+
 (use-package smerge-mode
   :bind ("C-x m" . hydra-smerge/body)
   :init (progn
@@ -632,8 +647,18 @@ This can be slightly disconcerting, but some people may prefer it."
                 (smerge-mode 1))))
           (add-hook 'find-file-hook #'bdirito/enable-smerge-maybe :append))
   :config
-  (defhydra hydra-smerge
-    (:color pink :hint nil :post (smerge-auto-leave))
+  (progn
+    (>=e "26.0"
+         nil
+         ;; http://git.savannah.gnu.org/cgit/emacs.git/commit/?id=bdfee01a6567b9f08f82bc84d1196e6cb62587ca
+         (defalias 'smerge-keep-upper 'smerge-keep-mine)
+         (defalias 'smerge-keep-lower 'smerge-keep-other)
+         (defalias 'smerge-diff-base-upper 'smerge-diff-base-mine)
+         (defalias 'smerge-diff-upper-lower 'smerge-diff-mine-other)
+         (defalias 'smerge-diff-base-lower 'smerge-diff-base-other))
+
+    (defhydra hydra-smerge
+      (:color pink :hint nil :post (smerge-auto-leave))
     "
 ^Move^       ^Keep^               ^Diff^                 ^Other^
 ^^-----------^^-------------------^^---------------------^^-------
@@ -665,4 +690,4 @@ _p_rev       _u_pper              _=_: upper/lower       _r_esolve
             (bury-buffer))
      "Save and bury buffer" :color blue)
     ("q" nil "cancel" :color blue))
-  )
+  ))
