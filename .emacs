@@ -394,7 +394,7 @@ annoying buffers if they are encountered:
  '(load-home-init-file t t)
  '(package-selected-packages
    (quote
-    (use-package hydra highlight-indent-guides json-mode markdown-mode company dockerfile-mode go-mode ace-window magit elpy terraform-mode yaml-mode ack tide typescript-mode whitespace-cleanup-mode web-mode nyan-mode js2-mode jinja2-mode coffee-mode))))
+    (lua-mode ag use-package hydra highlight-indent-guides json-mode markdown-mode company dockerfile-mode go-mode ace-window magit elpy terraform-mode yaml-mode ack tide typescript-mode whitespace-cleanup-mode web-mode nyan-mode js2-mode jinja2-mode coffee-mode))))
  '(show-paren-mode t)
  '(tool-bar-mode nil)
 
@@ -596,6 +596,7 @@ This can be slightly disconcerting, but some people may prefer it."
   (setq flycheck-check-syntax-automatically '(save mode-enabled))
   (eldoc-mode +1)
   (tide-hl-identifier-mode +1)
+  ;;(define-key (cdr ido-minor-mode-map-entry) [remap tide-rename-file] nil)
   ;; company is an optional dependency. You have to
   ;; install it separately via package-install
   ;; `M-x package-install [ret] company`
