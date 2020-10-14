@@ -423,6 +423,7 @@ alias kns=kubens
 alias k_edit_secret="KUBE_EDITOR=kube-secret-editor.py kubectl edit secret"
 eval "$(direnv hook bash)"
 source <(kubectl completion bash)
+source <(helm completion bash)
 
 
 export EDITOR=emacs
@@ -453,3 +454,5 @@ eval $(thefuck --alias fk)
 
 # python local path
 export PATH=${PATH}:${HOME}/.local/bin/
+
+alias work_shuttle='sshuttle -r brian@ath.boulderlabs.com:4422 192.168.192.0/24'
